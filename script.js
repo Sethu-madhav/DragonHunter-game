@@ -173,11 +173,31 @@ function goFight() {
 }
 
 function attack() {
-  console.log("attacked the beast.");
+  text.innerText = "The " + monsters[fighting].name + " attacks.";
+  text.innerText +=
+    " You attack it with your " + weapons[currentWeapon].name + ".";
+  health -= monsters[fighting].level;
+  monsterHealth -=
+    weapons[currentWeapon].power + Math.floor(Math.random() * xp) + 1;
+  healthText.innerText = health;
+  monsterHealthText.innerText = monsterHealth;
+  if (health <= 0) {
+    lose();
+  } else if (monsterHealth <= 0) {
+    defeatMonster();
+  }
 }
 
 function dodge() {
   console.log("dodge the beast attack.");
+}
+
+function lose() {
+  console.log("you lost to the monster.");
+}
+
+function defeatMonster() {
+  console.log("You slayed the monster.");
 }
 
 // initialize buttons
