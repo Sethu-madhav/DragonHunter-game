@@ -57,6 +57,12 @@ const locations = [
     "button functions": [goTown, goTown, goTown],
     text: "The monster screams Arg! as it dies. You gain experience points and find gold.",
   },
+  {
+    name: "lose",
+    "button text": ["REPLAY?", "REPLAY?", "REPLAY?"],
+    "button functions": [restart, restart, restart],
+    text: "You die. &#x2620;",
+  },
 ];
 
 const weapons = [
@@ -153,6 +159,7 @@ function fightDragon() {
 }
 
 function update(location) {
+  monsterStats.style.display = "none";
   button1.innerText = location["button text"][0];
   button2.innerText = location["button text"][1];
   button3.innerText = location["button text"][2];
@@ -203,7 +210,7 @@ function dodge() {
 }
 
 function lose() {
-  console.log("you lost to the monster.");
+  update(locations[5]);
 }
 
 function defeatMonster() {
@@ -218,3 +225,15 @@ function defeatMonster() {
 button1.onclick = goStore;
 button2.onclick = goCave;
 button3.onclick = fightDragon;
+
+function restart() {
+  xp = 0;
+  health = 100;
+  gold = 50;
+  currentWeapon = 0;
+  inventory = ["stick"];
+  goldText.innerText = gold;
+  healthText.innerText = health;
+  xpText.innerText = xp;
+  goTown();
+}
